@@ -40,19 +40,19 @@ El proyecto está diseñado para simular el proceso de recopilación de datos en
 <img src="/img/menu.png">  
 
 <h3>Estructura del proyecto</h3>
-El proyecto tiene la siguiente estructura de directorios:
-Reto1/
-|
-|--img/                     # Carpeta para almacenar las imágenes del proyecto
-|
-|--src/                     # Código fuente del proyecto
-|  |----index.py            # Script principal que realiza el llamado al menú interactivo
-|  |----menuPrincipal.py    # Script para mostrar el menú principal
-|  |----menuGestión.py      # Script con funciones para la gestión (CRUD) de experimentos
-|   
-|--README.md                # Este archivo
-|
-|--.gitignore               # Archivos y carpetas a ignorar por Git
+El proyecto tiene la siguiente estructura de directorios:<br>
+Reto1/<br>
+|<br>
+|--img/                     # Carpeta para almacenar las imágenes del proyecto<br>
+|<br>
+|--src/                     # Código fuente del proyecto <br>
+|  |----index.py            # Script principal que realiza el llamado al menú interactivo<br>
+|  |----menuPrincipal.py    # Script para mostrar el menú principal<br>
+|  |----menuGestión.py      # Script con funciones para la gestión (CRUD) de experimentos<br>
+|<br>   
+|--README.md                # Este archivo<br>
+|<br>
+|--.gitignore               # Archivos y carpetas a ignorar por Git<br>
 
 <h3>Dependencias</h3>
 Este proyecto utiliza las siguientes bibliotecas de Python:

@@ -11,7 +11,7 @@ El proyecto está diseñado para simular el proceso de recopilación de datos en
     <b>Menú de opciones:</b> El sistema es interactivo, a través de un menú de opciones permite al usuario seleccionar entre diferentes opciones.
   </li>
   <li>
-    <b>Recopilación de datos experimentales aleatorios:</b> El sistema permite agregar, visualizar y gestionar datos experimentales realizados en un laboratorio.
+    <b>Recopilación de datos experimentales:</b> El sistema permite agregar, visualizar y gestionar datos experimentales realizados en un laboratorio.
   </li>
   <li>
     <b>Análisis de resultados experimentales:</b> El sistema permite realizar operaciones básicas con los datos recopilados, como calcular promedios, máximos y mínimos de los resultados obtenidos
@@ -29,7 +29,7 @@ El proyecto está diseñado para simular el proceso de recopilación de datos en
   </li>
   <li>
     <b>Navega a la carpeta raíz del proyecto:</b><br>
-    <i>cd /d/python/reto1</i>
+    <i>cd /d/python/reto1/src/</i>
   </li>
   <li>
     <b>Ejecuta el archivo principal:</b><br>
@@ -39,6 +39,21 @@ El proyecto está diseñado para simular el proceso de recopilación de datos en
 
 <img src="/img/menu.png">  
 
+<h3>Estructura del proyecto</h3>
+El proyecto tiene la siguiente estructura de directorios:
+Reto1/
+|
+|--img/                     # Carpeta para almacenar las imágenes del proyecto
+|
+|--src/                     # Código fuente del proyecto
+|  |----index.py            # Script principal que realiza el llamado al menú interactivo
+|  |----menuPrincipal.py    # Script para mostrar el menú principal
+|  |----menuGestión.py      # Script con funciones para la gestión (CRUD) de experimentos
+|   
+|--README.md                # Este archivo
+|
+|--.gitignore               # Archivos y carpetas a ignorar por Git
+
 <h3>Dependencias</h3>
 Este proyecto utiliza las siguientes bibliotecas de Python:
 <ul>
@@ -47,5 +62,8 @@ Este proyecto utiliza las siguientes bibliotecas de Python:
   <li><b>msvcrt:</b> Este módulo (Microsoft C Runtime Library) es específico de sistemas Windows y proporciona funciones relacionadas con la consola, como la lectura de entradas de teclado.</li>
 </ul>
 
-<h3>Licencia</h3>
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+<h3>Desarrolladores</h3>
+<ul>
+  <li>ALFONSO RAFAEL CANTILLO IBARRA</li>
+  <li>ALVARO ENRIQUE DIAZ QUIROZ</li>
+</ul>

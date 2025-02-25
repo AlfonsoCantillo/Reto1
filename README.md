@@ -46,9 +46,9 @@ Reto1/<br>
 |--img/                     # Carpeta para almacenar las imágenes del proyecto<br>
 |<br>
 |--src/                     # Código fuente del proyecto <br>
-|  |----index.py            # Script principal que realiza el llamado al menú interactivo<br>
-|  |----menuPrincipal.py    # Script para mostrar el menú principal<br>
-|  |----menuGestión.py      # Script con funciones para la gestión (CRUD) de experimentos<br>
+   |----index.py            # Script principal que realiza el llamado al menú interactivo<br>
+   |----menuPrincipal.py    # Script para mostrar el menú principal<br>
+   |----menuGestión.py      # Script con funciones para la gestión (CRUD) de experimentos<br>
 |<br>   
 |--README.md                # Este archivo<br>
 |<br>

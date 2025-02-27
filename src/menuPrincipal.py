@@ -1,12 +1,14 @@
+import msvcrt
 import os
 import menuGestion
 
 #Función para mostrar en pantalla el menú principal del sistema
 def menu(listaExperimentos):
   #Limpiar la pantalla
-  os.system("cls") 
+  os.system("cls")   
   #Inicializar un ciclo para interactuar con el menú  
-  while True:  
+  while True:
+    print("Menú de opciones\n")  
     print("-----------------------------------------------")
     print("                  MENU DE OPCIONES             ")
     print("-----------------------------------------------")
@@ -14,16 +16,17 @@ def menu(listaExperimentos):
     print("[2] Análisis de resultados")
     print("[3] Generación de informes")
     print("[4] Salir del sistema")
+    opcion = input("Digite opción: ")
     try:      
-      opcion = int(input("Digite opción: "))  
-    except:
+      opcion = int(opcion)  
+    except ValueError:
       os.system("cls")
-      print("La opción digitada es invalida_33")
+      print(f"La opción digitada '{opcion}' no es válida.")
     else:    
       #Validar la opción digitada por el usuario
       if (opcion not in(1,2,3,4)):          
         os.system("cls")
-        print("La opción digitada es invalida_33\n")          
+        print(f"La opción digitada '{opcion}' no es válida.\n")          
       else:
         print("La opción seleccionada es", opcion)
         if opcion == 1:        
@@ -33,4 +36,11 @@ def menu(listaExperimentos):
           os.system("cls") #Limpiar la pantalla
           print("Gracias por utilizar nuestros servicios.")  
           break
+
+    print("\n[Esc] para volver al menú.") 
+    key= None
+    while key != b'\x1b':
+      key = msvcrt.getch()
+
+    os.system("cls")
           

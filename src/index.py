@@ -7,5 +7,5 @@ listaExperimentos=[]
 menuPrincipal.menu(listaExperimentos)
 
 """
-{'id': 1, 'nombre': 'E1', 'fecha': "15/02/2025", 'tipo': 'Q', 'resultados': [10.0, 12.0]}
+{'id': 1, 'nombre': 'E1', 'fecha': "15/02/2025", 'tipo': 'Q', 'resultados': [10.0, 12.0, 18.50, 11.40, 17.20, 15.0]}
 """

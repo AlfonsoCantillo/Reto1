@@ -40,7 +40,7 @@ def mostrarMenu(listaExperimentos):
           eliminarExperimentos(listaExperimentos)
         #Listar experimentos
         elif opcion == 3:                  
-          listarExperimentos(listaExperimentos)          
+          listarTodosExperimentos(listaExperimentos)          
         #Ir al menú principal
         elif opcion == 4:
           menuPrincipal.menu(listaExperimentos)
@@ -102,8 +102,8 @@ def agregarExperimentos(listaExperimentos):
   listaExperimentos.append(experimento)
   return True
   
-#Funcion para Listar los experimentos de la lista.
-def listarExperimentos(listaExperimentos):
+#Función para Listar todos los experimentos de la lista.
+def listarTodosExperimentos(listaExperimentos):
   os.system("cls")
   print("Menú de opciones / Gestión experimentos / Listar experimentos\n")
 
@@ -124,7 +124,20 @@ def listarExperimentos(listaExperimentos):
     print("\n")
     i+=1
 
-#Funcion para buscar un experimento especifico.
+#Función para mostrar la información de un experimento en especifico
+def mostrarInformacionExperimento(experimento):
+  if len(experimento)>0:
+    print(f"Id: {experimento['id']}")
+    print(f"Nombre: {experimento['nombre']}")
+    print(f"Fecha: {experimento['fecha']}")
+    tipo= experimento['tipo']
+    if tipo == 'Q': tipo="QUIMICA"
+    elif tipo == 'F': tipo="FISICA"
+    elif tipo == 'B': tipo="BIOLOGIA"
+    print(f"Tipo: {tipo}")
+    print(f"Resultados: {experimento['resultados']}")
+  
+#Función para buscar un experimento especifico.
 def buscarExperimentos(listaExperimentos,id):
   #Inicializar un ciclo FOR para recorrer la lista de experimentos y buscar conforme al id
   i= 0
@@ -133,29 +146,32 @@ def buscarExperimentos(listaExperimentos,id):
       return i
     i+=1
   return -1
-
+  
 #Funcion para Eliminar un experimento de la lista.
 def eliminarExperimentos(listaExperimentos):
   os.system("cls")
   print("Menú de opciones / Gestión experimentos / Eliminar experimento\n")
 
-  #Solicita el id del experimento  
+  #Solicita  el id del experimento  
   id = input("Digite el Id del experimento: ")
+  #Valida la entrada realiza por el usuario
   if len(id) == 0:
     print("Id no valido.")
     return False
   
   #LLamar la función para buscar experimento
   resultado= buscarExperimentos(listaExperimentos,id)
+  #Si respuesta es -1, no se encontro ningun experimento con el ID
   if resultado == -1:
     print(f"Experimento Id {id}, no registrado en sistema.")
     return False
   else:
-    print(f"Información del experimento:\n{listaExperimentos[resultado]}")
+    nombre= listaExperimentos[resultado]['nombre']    
+    mostrarInformacionExperimento(listaExperimentos[resultado])    
   
   #Inicializa un ciclo para solicitar al usuario confirmación de la eliminación
   while True:
-    confirmar = input(f"\n¿Esta seguro que desea eliminar el Experimento Id {id}? S/N: ")
+    confirmar = input(f"\n¿Esta seguro que desea eliminar el Experimento Id {id}-{nombre}? S/N: ")
     if confirmar in ('S','s'):
       listaExperimentos.pop(resultado)
       print(f"\nExperimento Eliminado con éxito.")

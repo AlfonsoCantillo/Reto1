@@ -1,6 +1,7 @@
 import msvcrt
 import os
 import menuGestion
+import menuAnalisis
 
 #Función para mostrar en pantalla el menú principal del sistema
 def menu(listaExperimentos):
@@ -27,10 +28,12 @@ def menu(listaExperimentos):
       if (opcion not in(1,2,3,4)):          
         os.system("cls")
         print(f"La opción digitada '{opcion}' no es válida.\n")          
-      else:
-        print("La opción seleccionada es", opcion)
+      else:        
         if opcion == 1:        
           menuGestion.mostrarMenu(listaExperimentos)
+          break
+        if opcion == 2:        
+          menuAnalisis.mostrarMenu(listaExperimentos)
           break
         elif opcion == 4:
           os.system("cls") #Limpiar la pantalla

@@ -11,7 +11,7 @@ def generarInformes(listaExperimentos):
   print("Menú de opciones / Generación de informes\n")
   try:
     # Ruta del directorio donde guardar el archivo
-    directorio = './reto1/data'
+    directorio = 'reto1/data'
     # validar que existe el direcotio
     os.makedirs(directorio, exist_ok=True)
     # Ruta completa del archivo

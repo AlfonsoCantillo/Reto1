@@ -44,9 +44,4 @@ def menu(listaExperimentos):
           print("Gracias por utilizar nuestros servicios.")  
           break
 
-    print("\n[Esc] para volver al menú.") 
-    key= None
-    while key != b'\x1b':
-      key = msvcrt.getch()
-
     generales.limpiarPantalla()

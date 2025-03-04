@@ -1,12 +1,13 @@
-import os
 import msvcrt
 import menuGestion
 import menuPrincipal
+import generales
+import statistics
 
 #Funcion para mostrar el submenú "Análisis de resultados"
 def mostrarMenu(listaExperimentos):
   #Limpiar la pantalla
-  os.system("cls")  
+  generales.limpiarPantalla() 
   #Inicializar un ciclo para interactuar con el submenú  
   while True: 
     print("Menú de opciones / Análisis de resultados\n")
@@ -24,11 +25,11 @@ def mostrarMenu(listaExperimentos):
     try:
       opcion = int(opcion)      
     except:
-      os.system("cls")
+      generales.limpiarPantalla()
       print(f"La opción digitada '{opcion}' no es válida.\n")
     else:
       if (opcion < 1 or opcion > 7):          
-        os.system("cls")
+        generales.limpiarPantalla()
         print(f"La opción digitada '{opcion}' no es válida.\n")          
       else:            
         #Calcular media          
@@ -37,13 +38,13 @@ def mostrarMenu(listaExperimentos):
         elif opcion == 2:
           calcularMediana(listaExperimentos)
         elif opcion == 3:
-          print("opción 3")
+          calcularModa(listaExperimentos)
         elif opcion == 4:
           calcularMaximoMinimo(listaExperimentos,"maximo")
         elif opcion == 5:
           calcularMaximoMinimo(listaExperimentos,"minimo")
         elif opcion == 6:
-          print("opción 6")
+          compararExperimentos(listaExperimentos)
         #Ir al menú principal
         elif opcion == 7:
           menuPrincipal.menu(listaExperimentos)
@@ -55,7 +56,7 @@ def mostrarMenu(listaExperimentos):
     while key != b'\x1b':
       key = msvcrt.getch()
 
-    os.system("cls")
+    generales.limpiarPantalla()
 
 #Función para solicitar al usuario entrada del ID de experimento y validar respuesta
 def validarEntrada():
@@ -69,7 +70,7 @@ def validarEntrada():
 
 #Función para calcular la media o promedio
 def calcularMedia(listaExperimentos):  
-  os.system("cls")
+  generales.limpiarPantalla()
   print("Menú de opciones / Análisis de resultados / Calcular media\n")
   #Llamar la función validarEntrada(), para solicitar y validar la entrada del ID, 
   #respuesta -1 entrada no valida, sale de la funcion, caso contrario continua su ejecución
@@ -98,7 +99,7 @@ def calcularMedia(listaExperimentos):
 
 #Función para calcular la mediana  
 def calcularMediana(listaExperimentos):  
-  os.system("cls")
+  generales.limpiarPantalla()
   print("Menú de opciones / Análisis de resultados / Calcular mediana\n")
   #Llamar la función validarEntrada(), para solicitar y validar la entrada del ID, 
   #respuesta -1 entrada no valida, sale de la funcion, caso contrario continua su ejecución
@@ -117,7 +118,7 @@ def calcularMediana(listaExperimentos):
     menuGestion.mostrarInformacionExperimento(listaExperimentos[resultado])
 
     #Calcular la mediana de los resultados del experimento
-    valores= listaExperimentos[resultado]['resultados']
+    valores= listaExperimentos[resultado]['resultados'].copy()
     #1. Ordenar los valores de menor a mayor
     valores.sort()
     #2. Encontrar la cantidad de datos
@@ -137,7 +138,7 @@ def calcularMediana(listaExperimentos):
 
 #Función para calcular el valor maximo o mínimo  
 def calcularMaximoMinimo(listaExperimentos,tipo):  
-  os.system("cls")
+  generales.limpiarPantalla()
   print(f"Menú de opciones / Análisis de resultados / Calcular valor {tipo}\n")
   #Llamar la función validarEntrada(), para solicitar y validar la entrada del ID, 
   #respuesta -1 entrada no valida, sale de la funcion, caso contrario continua su ejecución
@@ -155,16 +156,83 @@ def calcularMaximoMinimo(listaExperimentos,tipo):
     #Llamar a la función mostrarInformacionExperimento del modulo menuGestion 
     menuGestion.mostrarInformacionExperimento(listaExperimentos[resultado])
     
-    #Obtener la lista de valores del experimento
     valores= listaExperimentos[resultado]['resultados']
-    if tipo.lower() == "maximo":    
-      #Ordenar lista de mayor a menor
-      valores.sort(reverse = True)
+    if tipo.lower() == "maximo":                      
+      respuesta= max(valores)
     else:
-      #Ordenar lista de menor a mayor
-      valores.sort()
-    #Retornar el primer elimento de la lista     
-    print(f"\nEl valor {tipo} del experimento es: {valores[0]}")
+      respuesta= min(valores)
 
+    print(f"\nEl valor {tipo} del experimento es: {respuesta}")
 
-#mostrarMenu([{'id': 1, 'nombre': 'E1', 'fecha': "15/02/2025", 'tipo': 'Q', 'resultados': [2,3,5,3,7,8,3,9]}])
+#Función para calcular la moda
+def calcularModa(listaExperimentos):
+  generales.limpiarPantalla()
+  print("Menú de opciones / Análisis de resultados / Calcular mediana\n")
+  #Llamar la función validarEntrada(), para solicitar y validar la entrada del ID, 
+  #respuesta -1 entrada no valida, sale de la funcion, caso contrario continua su ejecución
+  id= validarEntrada()   
+  if id == -1:
+    return False
+  
+  #LLamar la función para buscar experimento
+  resultado= menuGestion.buscarExperimentos(listaExperimentos,id)
+  #Si respuesta es -1, no se encontro ningun experimento con el ID
+  if resultado == -1:
+    print(f"Experimento Id {id}, no registrado en sistema.")
+    return False
+  else:
+    #Llamar a la función mostrarInformacionExperimento del modulo menuGestion 
+    menuGestion.mostrarInformacionExperimento(listaExperimentos[resultado])
+
+    #clonar la lista original
+    valores= listaExperimentos[resultado]['resultados'].copy()
+    #Diccionario temporal, para almacenar la cantidad de elementos repetidos
+    temporal= {"elemento": 0, "cantidad":0}
+    #Recorrer la lista y validar la cantidad de elementos repetidos  
+    for x in valores:
+      i= 0
+      for j in valores:
+        if x == j:
+          i+=1
+
+      if i > 1:
+        if temporal["cantidad"] < i:
+          temporal= {"elemento": [x], "cantidad":i}
+        if temporal["cantidad"] == i and temporal["elemento"].count(x) == 0:
+          elementos= temporal["elemento"]
+          elementos.append(x)
+          temporal= {"elemento": elementos, "cantidad":i}
+
+    if temporal["cantidad"] == 0:
+      print(f"\nLos resultados obtenidos del experimento, no tienen una moda")
+    else:
+      print(f"\nLa moda, para el experimento es: {temporal["elemento"]}")
+
+#Función para comparar experimentos
+def compararExperimentos(listaExperimentos):
+  generales.limpiarPantalla()
+  print("Menú de opciones / Análisis de resultados / Comparar resultados entre experimentos\n")
+  
+  #Solicita el id de los experimento a comparar
+  ids = input("Digite el Id de los experimentos a comparar, separado por comas: ")
+  ids = ids.split(",")
+  #Valida la entrada realiza por el usuario
+  if len(ids) <= 1:            
+    print(f"Los Id(s) digitados {ids}, no son válidos.")
+    return False
+
+  for id in ids:  
+    #LLamar la función para buscar experimento
+    resultado= menuGestion.buscarExperimentos(listaExperimentos,id)
+    #Si respuesta es -1, no se encontro ningun experimento con el ID
+    if resultado == -1:
+      print(f"Experimento Id {id}, no registrado en sistema.")
+      #return False
+    else:
+      #Llamar a la función mostrarInformacionExperimento del modulo menuGestion 
+      print("\n")
+      menuGestion.mostrarInformacionExperimento(listaExperimentos[resultado])
+      promedio = round(statistics.mean(listaExperimentos[resultado]["resultados"]),2)
+      print(f"Promedio de resultado: {promedio}")
+      
+      

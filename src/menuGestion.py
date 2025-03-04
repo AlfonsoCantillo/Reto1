@@ -1,12 +1,12 @@
 from datetime import datetime
-import os
 import menuPrincipal
 import msvcrt
+import generales
 
 #Funcion para mostrar el submenú "GESTION DE EXPERIMENTOS"
 def mostrarMenu(listaExperimentos):
   #Limpiar la pantalla
-  os.system("cls")  
+  generales.limpiarPantalla() 
   #Inicializar un ciclo para interactuar con el submenú  
   while True: 
     print("Menú de opciones / Gestión experimentos\n")
@@ -21,11 +21,11 @@ def mostrarMenu(listaExperimentos):
     try:
       opcion = int(opcion)      
     except:
-      os.system("cls")
+      generales.limpiarPantalla()
       print(f"La opción digitada '{opcion}' no es válida.\n")
     else:
       if (opcion < 1 or opcion > 4):          
-        os.system("cls")
+        generales.limpiarPantalla()
         print(f"La opción digitada '{opcion}' no es válida.\n")          
       else:
         #Agregar experimento
@@ -52,11 +52,11 @@ def mostrarMenu(listaExperimentos):
     while key != b'\x1b':
       key = msvcrt.getch()
 
-    os.system("cls")
+    generales.limpiarPantalla()
     
 #Función para Agregar experimentos
 def agregarExperimentos(listaExperimentos):  
-  os.system("cls")
+  generales.limpiarPantalla()
   print("Menú de opciones / Gestión experimentos / Agregar experimento\n")
   
   #Solicita el nombre del experimento
@@ -104,7 +104,7 @@ def agregarExperimentos(listaExperimentos):
   
 #Función para Listar todos los experimentos de la lista.
 def listarTodosExperimentos(listaExperimentos):
-  os.system("cls")
+  generales.limpiarPantalla()
   print("Menú de opciones / Gestión experimentos / Listar experimentos\n")
 
   i= 1
@@ -149,7 +149,7 @@ def buscarExperimentos(listaExperimentos,id):
   
 #Funcion para Eliminar un experimento de la lista.
 def eliminarExperimentos(listaExperimentos):
-  os.system("cls")
+  generales.limpiarPantalla()
   print("Menú de opciones / Gestión experimentos / Eliminar experimento\n")
 
   #Solicita  el id del experimento  
